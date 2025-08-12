@@ -21,10 +21,6 @@ return new class extends Migration
             $table->string('lastname');
             $table->tinyInteger('status')->default(1);
             $table->timestamps();
-
-            $table->index(['clinic_id', 'doctor_id', 'from']);
-            $table->index('status');
-
         });
     }
 

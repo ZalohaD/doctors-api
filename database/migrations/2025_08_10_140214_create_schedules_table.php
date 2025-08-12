@@ -19,9 +19,6 @@ return new class extends Migration
             $table->datetime('from');
             $table->datetime('to');
             $table->timestamps();
-
-            $table->index(['clinic_id', 'doctor_id', 'from']);
-            $table->index('type');
         });
     }
 

@@ -17,9 +17,6 @@ return new class extends Migration
             $table->decimal('amount', 10, 2);
             $table->tinyInteger('status')->default(1);
             $table->timestamps();
-
-            $table->index('appointment_id');
-            $table->index('status');
         });
     }
 
