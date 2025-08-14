@@ -32,7 +32,7 @@ class Appointment extends Model
 
     public function reviews()
     {
-        return $this->hasMany(Review::class);
+        return $this->hasOne(Review::class);
     }
 
     public function payment()
@@ -40,10 +40,5 @@ class Appointment extends Model
         return $this->hasOne(Payment::class);
     }
 
-    // Scopes
-    public function scopeByStatus($query, AppointmentStatus $status)
-    {
-        return $query->where('status', $status);
-    }
 
 }

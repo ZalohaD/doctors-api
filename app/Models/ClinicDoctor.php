@@ -23,10 +23,4 @@ class ClinicDoctor extends Model
         return $this->belongsTo(Doctor::class);
     }
 
-    public function getSpecializationLabelsAttribute()
-    {
-        return collect($this->specialization)
-            ->map(fn($spec) => DoctorSpecialization::from($spec)->label())
-            ->toArray();
-    }
 }

@@ -38,5 +38,6 @@ enum ScheduleType: int
             $options[$case->value] = $case->label();
         }
         return $options;
+
     }
 }
