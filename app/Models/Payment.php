@@ -10,7 +10,7 @@ class Payment extends Model
     protected $fillable = ['appointment_id', 'amount', 'status'];
 
     protected $casts = [
-        'amount' => 'decimal:2',
+        'amount' => 'integer',
         'status' => PaymentStatus::class,
     ];
 

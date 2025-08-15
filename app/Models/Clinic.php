@@ -16,11 +16,6 @@ class Clinic extends Model
         'phone',
     ];
 
-    protected $casts = [
-        'latitude' => 'decimal:8',
-        'longitude' => 'decimal:8',
-    ];
-
     public function doctors(): BelongsToMany
     {
         return $this->belongsToMany(Doctor::class, 'clinic_doctors')

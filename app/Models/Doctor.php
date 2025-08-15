@@ -9,8 +9,17 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Doctor extends Model
 {
     protected $fillable = [
-        'firstname',
-        'lastname',
+        'first_name',
+        'last_name',
+        'email',
+        'phone',
+        'address',
+    ];
+
+
+    protected $hidden = [
+        'password',
+        'remember_token',
     ];
 
     public function clinics(): BelongsToMany
