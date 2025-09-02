@@ -16,8 +16,7 @@ return new class extends Migration
             $table->tinyInteger('type');
             $table->foreignId('clinic_id')->constrained()->onDelete('cascade');
             $table->foreignId('doctor_id')->constrained()->onDelete('cascade');
-            $table->datetime('from');
-            $table->datetime('to');
+            $table->json('schedule');
             $table->timestamps();
         });
     }

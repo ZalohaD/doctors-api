@@ -8,13 +8,12 @@ use App\Enums\ScheduleType;
 class Schedule extends Model
 {
     protected $fillable = [
-        'type', 'clinic_id', 'doctor_id', 'from', 'to'
+        'type', 'clinic_id', 'doctor_id', 'schedule'
     ];
 
     protected $casts = [
         'type' => ScheduleType::class,
-        'from' => 'datetime',
-        'to' => 'datetime',
+        'schedule' => 'array',
     ];
 
     public function clinic()
