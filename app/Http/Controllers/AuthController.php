@@ -3,14 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Enums\DoctorSpecialization;
-use App\Models\Appointment;
 use App\Models\Doctor;
 use App\Models\Schedule;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rules\Enum;
 use \Illuminate\Validation\ValidationException;
+use Laravel\Socialite\Facades\Socialite;
+use Throwable;
+
 class AuthController extends Controller
 {
     public function register(Request $request){
@@ -56,6 +60,48 @@ class AuthController extends Controller
         return response()->json(['message' => 'Logged out.']);
     }
 
+    public function redirectToGoogle()
+    {
+        return Socialite::driver('google')->redirect();
+    }
+
+    public function googleAuth()
+    {
+        try {
+            $googleUser = Socialite::driver('google')->stateless()->user();
+
+            $user = User::updateOrCreate(
+                ['email' => $googleUser->getEmail()],
+                [
+                    'name' => $googleUser->getName(),
+                    'google_id' => $googleUser->getId(),
+                    'password' => Hash::make(Str::random(10)),
+                    'avatar' => $googleUser->getAvatar(),
+                ]
+            );
+
+            $token = $user->createToken('api_token')->plainTextToken;
+
+            return redirect()->away(
+                'http://localhost:5173/auth/callback?token=' . $token . '&user=' . urlencode(json_encode([
+                    'id' => $user->id,
+                    'name' => $user->name,
+                    'email' => $user->email,
+                    'avatar' => $user->avatar,
+                ]))
+            );
+
+        } catch (\Exception $e) {
+            \Log::error($e->getMessage());
+            return redirect()->away(
+                'http://localhost:5173/login?error=' . urlencode($e->getMessage())
+            );
+        }
+    }
+
+
+
+
 
 
     public function registerDoctor(Request $request)
@@ -90,16 +136,14 @@ class AuthController extends Controller
                 'specialization' => json_encode($data['specialization']),
             ]);
 
-            $scheduleData = [
-                'available_time' => $data['available_time'],
-            ];
 
-                Schedule::create([
-                    'doctor_id' => $doctor->id,
-                    'clinic_id' => $data['clinic_id'],
-                    'type'      => 1,
-                   'schedule'  => $scheduleData,
-                ]);
+
+            Schedule::create([
+                'doctor_id' => $doctor->id,
+                'clinic_id' => $data['clinic_id'],
+                'type'      => 1,
+                'schedule'  => $data['available_time'],
+            ]);
 
 
             $token = $doctor->createToken('auth_token')->plainTextToken;

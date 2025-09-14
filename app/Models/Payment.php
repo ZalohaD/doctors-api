@@ -7,7 +7,7 @@ use App\Enums\PaymentStatus;
 
 class Payment extends Model
 {
-    protected $fillable = ['appointment_id', 'amount', 'status'];
+    protected $fillable = ['appointment_id', 'amount', 'status', ''];
 
     protected $casts = [
         'amount' => 'integer',

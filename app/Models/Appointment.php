@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Appointment extends Model
 {
     protected $fillable = [
-        'clinic_id', 'doctor_id', 'from', 'to', 'first_name', 'last_name', 'status'
+        'clinic_id', 'doctor_id', 'user_id','from', 'to', 'first_name', 'last_name', 'status'
     ];
 
     protected $casts = [
@@ -19,6 +19,11 @@ class Appointment extends Model
       'to' => 'datetime',
       'status' => AppointmentStatus::class
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public function clinic()
     {
@@ -39,6 +44,8 @@ class Appointment extends Model
     {
         return $this->hasOne(Payment::class);
     }
+
+
 
 
 }
