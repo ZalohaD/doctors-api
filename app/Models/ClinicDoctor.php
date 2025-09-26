@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Enums\DoctorSpecialization;
 
 class ClinicDoctor extends Model
 {
+    use HasFactory;
     protected $fillable = ['clinic_id', 'doctor_id', 'specialization'];
 
     protected $casts = [

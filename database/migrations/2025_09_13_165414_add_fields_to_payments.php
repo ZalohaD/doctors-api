@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::table('payments', function (Blueprint $table) {
             $table->string('transaction_id')->after('amount');
             $table->string('payment_method')->after('transaction_id');
-            $table->string('payment_receipt')->after('payment_url');
+            $table->string('payment_receipt');
             $table->json('appointment_time')->after('payment_receipt');
         });
     }

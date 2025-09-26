@@ -12,19 +12,26 @@ class ClinicFactory extends Factory
 {
     protected $model = Clinic::class;
 
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
     public function definition(): array
     {
+        $latitude = fake()->latitude(49.0, 51.0);
+        $longitude = fake()->longitude(22.0, 40.0);
+
         return [
-            'name'      => $this->faker->company . ' Clinic',
-            'address'   => $this->faker->address,
-            'latitude'  => $this->faker->latitude(48.0, 52.0),
-            'longitude' => $this->faker->longitude(23.0, 38.0),
-            'phone'     => $this->faker->phoneNumber,
+            'name' => fake()->company() . ' Medical Center',
+            'address' => fake()->address(),
+            'latitude' => $latitude,
+            'longitude' => $longitude,
+            'phone' => fake()->phoneNumber(),
         ];
     }
+
+    public function withoutCoordinates(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'latitude' => null,
+            'longitude' => null,
+        ]);
+    }
 }
+

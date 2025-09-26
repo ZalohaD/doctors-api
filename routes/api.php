@@ -40,5 +40,6 @@ Route::middleware('auth:sanctum')->group(function () {
 
 
 Route::get('/doctor/{id}', [DoctorController::class, 'profile']);
+Route::post('/appointments', [DoctorController::class, 'createAppointments']);
 
 Route::get('/search', [SearchController::class, 'result']);

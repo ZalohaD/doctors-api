@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Enums\AppointmentStatus;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -10,8 +11,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Appointment extends Model
 {
+    use HasFactory;
     protected $fillable = [
-        'clinic_id', 'doctor_id', 'user_id','from', 'to', 'first_name', 'last_name', 'status'
+        'clinic_id', 'doctor_id', 'user_id','from', 'to', 'firstname', 'lastname', 'status'
     ];
 
     protected $casts = [

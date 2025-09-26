@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Doctor;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 
@@ -10,24 +11,23 @@ use Illuminate\Support\Facades\Hash;
  */
 class DoctorFactory extends Factory
 {
+    protected $model = Doctor::class;
 
-    protected static ?string $password;
-
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
     public function definition(): array
     {
         return [
-            'first_name' => $this->faker->firstName,
-            'last_name' => $this->faker->lastName,
-            'email' => $this->faker->unique()->safeEmail(),
-            'address' => $this->faker->address,
-            'phone' => $this->faker->phoneNumber,
-            'password' => static::$password ?? Hash::make('password'),
-            'photo' => $this->faker->imageUrl(),
+            'first_name' => fake()->firstName(),
+            'last_name' => fake()->lastName(),
+            'email' => fake()->unique()->safeEmail(),
+            'phone' => fake()->phoneNumber(),
+            'address' => fake()->address(),
+            'photo' => fake()->imageUrl(300, 400, 'people'),
+            'social_links' => json_encode([
+                'facebook' => fake()->optional()->url(),
+                'linkedin' => fake()->optional()->url(),
+                'twitter' => fake()->optional()->url(),
+            ]),
+            'password' => Hash::make('password'),
         ];
     }
 }
