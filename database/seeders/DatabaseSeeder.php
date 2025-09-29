@@ -9,6 +9,7 @@ use App\Models\ClinicDoctor;
 use App\Models\Doctor;
 use App\Models\DoctorService;
 use App\Models\Review;
+use App\Models\Schedule;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\App;
@@ -53,5 +54,6 @@ class DatabaseSeeder extends Seeder
             }
         }
         DoctorService::factory(10)->create();
+        Schedule::factory(10)->create();
     }
 }

@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Enums\ScheduleType;
 
 class Schedule extends Model
 {
+    use HasFactory;
     protected $fillable = [
         'type', 'clinic_id', 'doctor_id', 'schedule'
     ];
