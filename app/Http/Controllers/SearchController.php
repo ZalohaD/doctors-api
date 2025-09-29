@@ -10,7 +10,7 @@ class SearchController extends Controller
 {
     public function result(Request $request): JsonResponse
     {
-        $search = $request->input('search');
+        $search = $request->input('q');
         $results = Doctor::query()
             ->where('first_name', 'LIKE', "%$search%")
             ->orWhere('last_name', 'LIKE', "%$search%")
