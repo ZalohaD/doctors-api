@@ -7,6 +7,7 @@ use App\Models\Appointment;
 use App\Models\Clinic;
 use App\Models\ClinicDoctor;
 use App\Models\Doctor;
+use App\Models\DoctorService;
 use App\Models\Review;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -51,5 +52,6 @@ class DatabaseSeeder extends Seeder
                     ]);
             }
         }
+        DoctorService::factory(10)->create();
     }
 }

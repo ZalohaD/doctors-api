@@ -3,10 +3,12 @@
 namespace App\Models;
 
 use App\Enums\DoctorSpecialization;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class DoctorService extends Model
 {
+    use HasFactory;
     protected $fillable = [
         'doctor_id',
         'clinic_id',

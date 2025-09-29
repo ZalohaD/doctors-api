@@ -12,8 +12,7 @@ return [
     | in web browsers. You are free to adjust these settings as needed.
     |
     */
-// У файлі config/cors.php
-    'paths' => ['api/*', 'sanctum/csrf-cookie'], // Додайте 'sanctum/csrf-cookie' якщо використовуєте Sanctum
+    'paths' => ['api/*', 'sanctum/csrf-cookie'],
     'allowed_methods' => ['*'],
     'allowed_origins' => ['*'],
     'allowed_origins_patterns' => [],
