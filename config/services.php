@@ -38,6 +38,10 @@ return [
         'client_id' => env('GOOGLE_CLIENT_ID'),
         'client_secret' => env('GOOGLE_CLIENT_SECRET'),
         'redirect' => env('GOOGLE_REDIRECT_URL'),
-    ]
+    ],
+    'algolia' => [
+        'app_id' => env('ALGOLIA_APP_ID'),
+        'search_key' => env('ALGOLIA_SEARCH_KEY'),
+    ],
 
 ];

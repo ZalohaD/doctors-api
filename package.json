@@ -4,7 +4,9 @@
     "type": "module",
     "scripts": {
         "build": "vite build",
-        "dev": "vite"
+        "dev": "vite",
+        "build-AddressAutocomplete": "cd nova-components/AddressAutocomplete && npm run dev",
+        "build-AddressAutocomplete-prod": "cd nova-components/AddressAutocomplete && npm run prod"
     },
     "devDependencies": {
         "@tailwindcss/vite": "^4.0.0",

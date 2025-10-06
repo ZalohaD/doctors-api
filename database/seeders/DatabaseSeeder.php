@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Enums\DoctorSpecialization;
+use App\Models\Admin;
 use App\Models\Appointment;
 use App\Models\Clinic;
 use App\Models\ClinicDoctor;
@@ -21,6 +22,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        Admin::factory()->create();
         $users = User::factory(10)->create();
 
         $clinics = Clinic::factory(5)->create();
