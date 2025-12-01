@@ -4,9 +4,7 @@
     "type": "module",
     "scripts": {
         "build": "vite build",
-        "dev": "vite",
-        "build-AddressAutocomplete": "cd nova-components/AddressAutocomplete && npm run dev",
-        "build-AddressAutocomplete-prod": "cd nova-components/AddressAutocomplete && npm run prod"
+        "dev": "vite"
     },
     "devDependencies": {
         "@tailwindcss/vite": "^4.0.0",
@@ -15,5 +13,8 @@
         "laravel-vite-plugin": "^2.0.0",
         "tailwindcss": "^4.0.0",
         "vite": "^7.0.4"
+    },
+    "dependencies": {
+        "@geoapify/geocoder-autocomplete": "^2.2.1"
     }
 }

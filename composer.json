@@ -12,10 +12,6 @@
         {
             "type": "composer",
             "url": "https://nova.laravel.com"
-        },
-        {
-            "type": "path",
-            "url": "./nova-components/AddressAutocomplete"
         }
     ],
     "require": {
@@ -26,7 +22,8 @@
         "laravel/sanctum": "*",
         "laravel/socialite": "^5.23",
         "laravel/tinker": "^2.10.1",
-        "zalohad/AddressAutocomplete": "@dev"
+        "stripe/stripe-php": "^18.0",
+        "wamesk/laravel-nova-address-field": "^5.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",

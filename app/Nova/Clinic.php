@@ -4,8 +4,10 @@ namespace App\Nova;
 
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Http\Requests\NovaRequest;
-use Laravel\Nova\Fields;
+use Wame\LaravelNovaAddressField\Fields\Address;
 
 class Clinic extends Resource
 {
@@ -21,7 +23,7 @@ class Clinic extends Resource
      *
      * @var string
      */
-    public static $title = 'id';
+    public static $title = 'name'; // Змінено на 'name' для зручності
 
     /**
      * The columns that should be searched.
@@ -29,7 +31,7 @@ class Clinic extends Resource
      * @var array
      */
     public static $search = [
-        'id', 'name'
+        'id', 'name', 'address', 'phone'
     ];
 
     /**
@@ -41,8 +43,15 @@ class Clinic extends Resource
     {
         return [
             ID::make()->sortable(),
-            Fields\Text::make('Name')->sortable(),
-
+            Text::make('Name')->sortable()->rules('required', 'max:255'),
+            Address::make('Address')
+                ->sortable()
+                ->withoutCompany()
+                ->withoutName()
+                ->countryList(['ua' => 'Ukraine']),
+            Number::make('Latitude')->sortable()->readonly(true),
+            Number::make('Longitude')->sortable()->readonly(true),
+            Text::make('Phone')->sortable()->rules('required', 'max:20'),
         ];
     }
 

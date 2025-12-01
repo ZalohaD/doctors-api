@@ -99,11 +99,6 @@ class AuthController extends Controller
         }
     }
 
-
-
-
-
-
     public function registerDoctor(Request $request)
     {
         $data = $request->validate([

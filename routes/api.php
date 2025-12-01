@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\PaymentController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\ReviewController;
@@ -42,3 +43,7 @@ Route::get('/doctor/{id}', [DoctorController::class, 'profile']);
 Route::post('/appointments', [DoctorController::class, 'createAppointments']);
 
 Route::get('/search', [SearchController::class, 'result']);
+
+Route::post('/payments/create', [PaymentController::class, 'createCheckoutSession']);
+Route::post('/stripe/webhook', [PaymentController::class, 'handleWebhook']);
+
