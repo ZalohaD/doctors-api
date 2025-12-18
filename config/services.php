@@ -39,6 +39,7 @@ return [
         'client_secret' => env('GOOGLE_CLIENT_SECRET'),
         'redirect' => env('GOOGLE_REDIRECT_URL'),
         'google_maps_api_key' => env('GOOGLE_MAPS_API_KEY'),
+        'google_base_url' => env('GOOGLE_BASE_URL'),
     ],
     'stripe' => [
         'key' => env('STRIPE_KEY'),
