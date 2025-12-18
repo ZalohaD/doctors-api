@@ -2,50 +2,35 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Appointment;
-use App\Models\Review;
+use App\Services\ReviewDomainService;
+use App\Validators\ReviewCreateValidator;
+use App\DTO\ReviewDTO;
 use Illuminate\Http\Request;
 
 class ReviewController extends Controller
 {
+    public function __construct(private ReviewDomainService $service) {}
 
     public function index($doctorId)
     {
-        $reviews = Review::with(['appointment.user'])
-            ->whereHas('appointment', fn($q) => $q->where('doctor_id', $doctorId))
-            ->orderBy('created_at', 'desc')
-            ->get()
-            ->map(function($review) {
-                return [
-                    'id' => $review->id,
-                    'comment' => $review->comment,
-                    'rating' => $review->rating,
-                    'appointment_id' => $review->appointment_id,
-                    'created_at' => $review->created_at,
-                    'user_name' => $review->appointment->user->name ?? 'Анонім',
-                ];
-            });
-
-        return response()->json($reviews);
-
+        return response()->json($this->service->listByDoctor($doctorId));
     }
+
     public function submit(Request $request)
     {
-        $userId = auth('sanctum')->id();
-        $data = $request->validate([
-            'appointment_id' => 'required|integer',
-            'comment' => 'required|string',
-            'rating' => 'required|integer',
-        ]);
-        $appointment = Appointment::where('id', $request->appointment_id)
-            ->where('user_id', $userId)
-            ->firstOrFail();
+        $data = ReviewCreateValidator::validate($request->all());
+        $dto = new ReviewDTO(
+            $data['appointment_id'],
+            $data['comment'],
+            $data['rating'],
+            auth('sanctum')->id()
+        );
 
-        $review = $appointment->reviews()->create($data);
+        $review = $this->service->submit($dto);
 
         return response()->json([
             'message' => 'Відгук успішно додано',
-            'review'  => $review,
+            'review' => $review,
         ], 201);
     }
 }

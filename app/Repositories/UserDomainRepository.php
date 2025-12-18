@@ -6,6 +6,7 @@ use App\Models\User;
 
 class UserDomainRepository
 {
+
     public function create(array $data): User
     {
         return User::create($data);

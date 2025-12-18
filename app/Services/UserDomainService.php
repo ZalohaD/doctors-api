@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\User;
 use App\Repositories\UserDomainRepository;
 use App\DTO\UserDTO;
 use Illuminate\Support\Facades\Hash;
@@ -11,6 +12,19 @@ use Illuminate\Validation\ValidationException;
 
 class UserDomainService {
     public function __construct(private UserDomainRepository $repo) {}
+
+
+    public function getCurrentUser(): User
+    {
+        $user = auth('sanctum')->user();
+
+        if (!$user) {
+            throw new \DomainException('Unauthorized');
+        }
+
+        return $user;
+    }
+
 
     public function register(UserDTO $dto): array {
         $user = $this->repo->create([
@@ -57,4 +71,16 @@ class UserDomainService {
             return redirect()->away(config('google_base_url').'/login?error='.urlencode($e->getMessage()));
         }
     }
+
+    public function updateProfile(User $user, array $data): User
+    {
+        $user->update($data);
+        return $user->refresh();
+    }
+
+    public function getAppointments(User $user)
+    {
+        return $user->appointments()->get();
+    }
+
 }

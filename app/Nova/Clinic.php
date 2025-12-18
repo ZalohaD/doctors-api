@@ -23,7 +23,7 @@ class Clinic extends Resource
      *
      * @var string
      */
-    public static $title = 'name'; // Змінено на 'name' для зручності
+    public static $title = 'name';
 
     /**
      * The columns that should be searched.
